@@ -1,4 +1,4 @@
-project "HelloWorld"
+project "HelloWorld" -- Set the project name
     kind "ConsoleApp"
     language "C"
     staticruntime "on"
@@ -12,6 +12,18 @@ project "HelloWorld"
         "src/**.c",
     }
 
+    defines {
+        -- Define here
+    }
+
+    libdirs {
+        -- lib directory 
+    }
+
+    links {
+        -- link library here
+    }
+
     filter "configurations:Debug"
         runtime "Debug"
         symbols "On"
@@ -19,3 +31,15 @@ project "HelloWorld"
     filter "configurations:Release"
         runtime "Release"
         optimize "On"
+
+    filter "system:macosx"
+        systemversion "latest"
+        system "macosx"
+    
+    filter "system:linux"
+        system "linux"
+        systemversion "latest"
+    
+    filter "system:Windows"
+        system "Windows"
+        systemversion "latest"
