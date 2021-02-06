@@ -26,3 +26,12 @@ premake5 <action>
 1. Copy the `HelloWorld` project and change the name.
 
 2. Edit the premake5.lua in the your newly created project and change the project name to the same name as the directory.
+
+3. Edit the root premake5.lua file look at how the HelloWorld project is included. Add you project in the next line with your project name.
+
+Sample
+
+```lua
+include "HelloWorld"
+include "Tree"
+```

@@ -10,3 +10,4 @@ workspace "C_Projects"
 
 include "HelloWorld"
 include "Tree"
+include "TrafficLight"
