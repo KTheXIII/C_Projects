@@ -4,6 +4,8 @@
 ## Binaries
 **/bin
 **/obj
+Debug
+Release
 
 # Generated Workspaces
 ###############################################################################
