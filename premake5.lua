@@ -18,4 +18,5 @@ include "TrafficLight"
 -- Exclude Windows
 if os.host() ~= "windows" then
   include "HelloNCurses"
+  include "TMatrix"
 end

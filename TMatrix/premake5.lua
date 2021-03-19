@@ -1,4 +1,4 @@
-project "TrafficLight" -- Set the project name
+project "TMatrix"
     kind "ConsoleApp"
     language "C"
     staticruntime "on"
@@ -26,6 +26,7 @@ project "TrafficLight" -- Set the project name
 
     links {
         -- link library here
+        "ncurses"
     }
 
     filter "configurations:Debug"
@@ -47,7 +48,3 @@ project "TrafficLight" -- Set the project name
     filter "system:Windows"
         system "Windows"
         systemversion "latest"
-
-        defines {
-            "_WIN32"
-        }

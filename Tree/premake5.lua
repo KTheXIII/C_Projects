@@ -12,6 +12,10 @@ project "Tree"
         "src/**.c",
     }
 
+    includedirs {
+        "src"
+    }
+
     filter "configurations:Debug"
         runtime "Debug"
         symbols "On"

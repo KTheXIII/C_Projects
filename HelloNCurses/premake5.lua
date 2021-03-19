@@ -12,6 +12,10 @@ project "HelloNCurses" -- Set the project name
         "src/**.c",
     }
 
+    includedirs {
+        "src"
+    }
+
     defines {
         -- Define here
     }
