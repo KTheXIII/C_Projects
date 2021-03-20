@@ -24,6 +24,9 @@ void set_colors() {
 bool init_ui() {
     // Init curses
     uiwindow = initscr();
+
+    curs_set(0);  // disable cursor
+
     if (uiwindow == NULL) return false;
 
     start_color();

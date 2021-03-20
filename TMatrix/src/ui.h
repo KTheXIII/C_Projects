@@ -3,8 +3,8 @@
 
 #include <stdbool.h>
 
-#define MAX_ROW 78
-#define MAX_COL 273
+#define MAX_ROW 24
+#define MAX_COL 80
 
 #define MAX_INTENSITY 13
 #define MIN_INTENSITY 2

@@ -8,10 +8,10 @@
 
 #include "ui.h"
 
-#define NUM_DRIPS 255
-#define PROB_DRIP_SPAWN 0.65
-#define PROB_DIM 0.20
-#define PROB_CHANGE 0.95
+#define NUM_DRIPS 250
+#define PROB_DRIP_SPAWN 0.85
+#define PROB_DIM 0.05
+#define PROB_CHANGE 0.98
 #define RANDOM_PRINTABLE_CHARACTER (33 + (rand() % 80))
 
 typedef struct {
