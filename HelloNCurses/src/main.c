@@ -1,30 +1,24 @@
 #include <ncurses.h>
 #include <stdint.h>
 
+#include "display.h"
+
 int main(int argc, char const *argv[]) {
-    // Initialize
-    initscr();
+    DISPLAY *display = display_init();
 
-    int32_t row, col;
-    row = 1;
-    col = 1;
-    // Moves the cursor to the specified location
-    move(row, col);
+    for (int32_t i = 0; i < display->height; i++) {
+        for (int32_t j = 0; j < display->width; j++) {
+            if (i == 0 || i == display->height - 1 || j == 0 ||
+                j == display->width - 1)
+                display_set(i, j, '*');
+        }
+    }
 
-    // Prints to window
-    printw("Hello, World!");
-
-    // Refreshes the screen
-    refresh();
-
-    // Waits for user input, returns int value of that key
-    int32_t c = getch();
-
-    printw("%d", c);
+    display_show();
 
     getch();
 
-    endwin();
+    display_cleanup();
 
     return 0;
 }

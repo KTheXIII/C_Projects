@@ -13,6 +13,7 @@ include "HelloWorld"
 include "Tree"
 include "TrafficLight"
 include "HelloCircularQueue"
+include "GuessTheNumber"
 
 -- Platform specific projects
 
