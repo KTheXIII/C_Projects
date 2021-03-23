@@ -12,6 +12,7 @@ workspace "C_Projects"
 include "HelloWorld"
 include "Tree"
 include "TrafficLight"
+include "HelloCircularQueue"
 
 -- Platform specific projects
 
