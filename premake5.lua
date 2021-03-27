@@ -8,12 +8,16 @@ workspace "C_Projects"
     "Release",
   }
 
+-- Libraries
+include "Terminal"
+
 -- All platform
 include "HelloWorld"
 include "Tree"
 include "TrafficLight"
 include "HelloCircularQueue"
 include "GuessTheNumber"
+include "ConsoleFPS"
 
 -- Platform specific projects
 
