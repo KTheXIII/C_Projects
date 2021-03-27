@@ -31,6 +31,16 @@ project "Terminal" -- Set the project name
         -- link library here
     }
 
+    if os.host() ~= "windows" then
+        defines {
+            "__UNIX_"
+        }
+
+        links {
+            "ncurses"
+        }
+    end
+
     filter "configurations:Debug"
         runtime "Debug"
         symbols "On"
@@ -43,25 +53,9 @@ project "Terminal" -- Set the project name
         systemversion "latest"
         system "macosx"
 
-        defines {
-            "__UNIX_"
-        }
-
-        links {
-            "ncurses"
-        }
-
     filter "system:linux"
         system "linux"
         systemversion "latest"
-
-        defines {
-            "__UNIX_"
-        }
-
-        links {
-            "ncurses"
-        }
 
     filter "system:Windows"
         system "Windows"
