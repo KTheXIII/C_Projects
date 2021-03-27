@@ -27,6 +27,7 @@ int main(int argc, char const *argv[]) {
 
     int8_t isRunning = 0x01;
     display_setNoInputTimeout();
+    display_setShowCursor(0);
 
     while (isRunning) {
         int32_t input = display_getInput();
@@ -34,7 +35,9 @@ int main(int argc, char const *argv[]) {
 
         display_clear();
 
-        display_draw(sprite, 2, 2);
+        display_print("Hello, World!", 2, 1);
+
+        display_draw(sprite, 20, 10);
 
         display_show();
 

@@ -48,6 +48,7 @@ void display_destructor() {
 
 void display_setInputTimeout(const int32_t timeout) { timeout(timeout); }
 void display_setNoInputTimeout() { display_setInputTimeout(0); }
+void display_setShowCursor(int8_t enable) { curs_set(enable); }
 
 int32_t display_getInput() { return getch(); }
 
@@ -59,7 +60,22 @@ void display_clear() {
     }
 }
 
-void display_print(const char *text, int32_t x, int32_t y) {}
+void display_print(const char *text, int32_t x, int32_t y) {
+    int32_t row = y;
+    int32_t col = x;
+    const char *textPtr = text;
+
+    while (*textPtr) {
+        sprite_setData(display.buffer, col, row, *textPtr);
+        if (*textPtr == '\n') {
+            col = x;
+            row++;
+        } else {
+            col++;
+        }
+        textPtr++;
+    }
+}
 
 void display_draw(const Sprite *sprite, int32_t x, int32_t y) {
     const int32_t width = sprite_getWidth(sprite);

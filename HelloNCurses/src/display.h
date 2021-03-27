@@ -24,6 +24,7 @@ void display_destructor();
 
 void display_setInputTimeout(const int32_t timeout);
 void display_setNoInputTimeout();
+void display_setShowCursor(int8_t enable);
 
 int32_t display_getInput();
 
