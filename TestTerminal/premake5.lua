@@ -1,4 +1,4 @@
-project "ConsoleFPS" -- Set the project name
+project "TestTerminal" -- Set the project name
     kind "ConsoleApp"
     language "C"
     staticruntime "on"

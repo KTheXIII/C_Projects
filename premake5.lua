@@ -17,7 +17,7 @@ include "Tree"
 include "TrafficLight"
 include "HelloCircularQueue"
 include "GuessTheNumber"
-include "ConsoleFPS"
+include "TestTerminal"
 
 -- Platform specific projects
 
