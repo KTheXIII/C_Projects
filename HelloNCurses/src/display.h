@@ -22,6 +22,9 @@ Display *display_get();
 
 void display_destructor();
 
+int32_t display_getWidth();
+int32_t display_getHeight();
+
 void display_setInputTimeout(const int32_t timeout);
 void display_setNoInputTimeout();
 void display_setShowCursor(int8_t enable);
@@ -29,11 +32,8 @@ void display_setShowCursor(int8_t enable);
 int32_t display_getInput();
 
 void display_clear();
-
 void display_print(const char *text, int32_t x, int32_t y);
-
-void display_draw(const Sprite *sprite, int32_t x, int32_t y);
-
+void display_draw(Sprite *sprite, int32_t x, int32_t y);
 void display_show();
 
 #endif

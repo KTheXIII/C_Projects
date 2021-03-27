@@ -10,6 +10,7 @@
 
 #include "display.h"
 
+#include <locale.h>
 #include <ncurses.h>
 #include <stdint.h>
 
@@ -18,6 +19,7 @@ struct Display {
     int32_t width;
     int32_t height;
 
+    // display buffer
     Sprite *buffer;
 };
 
@@ -26,6 +28,8 @@ bool initialized = false;
 
 Display *display_construct() {
     if (initialized) return &display;
+
+    setlocale(LC_ALL, "");
 
     display.window = initscr();
     getmaxyx(stdscr, display.height, display.width);
@@ -46,6 +50,15 @@ void display_destructor() {
     sprite_destructor(display.buffer);
 }
 
+int32_t display_getWidth() {
+    if (!initialized) return 0;
+    return display.width;
+}
+int32_t display_getHeight() {
+    if (!initialized) return 0;
+    return display.height;
+}
+
 void display_setInputTimeout(const int32_t timeout) { timeout(timeout); }
 void display_setNoInputTimeout() { display_setInputTimeout(0); }
 void display_setShowCursor(int8_t enable) { curs_set(enable); }
@@ -56,6 +69,7 @@ void display_clear() {
     for (int32_t i = 0; i < display.height; i++) {
         for (int32_t j = 0; j < display.width; j++) {
             sprite_setData(display.buffer, j, i, ' ');
+            sprite_setColor(display.buffer, j, i, 0);
         }
     }
 }
@@ -77,12 +91,14 @@ void display_print(const char *text, int32_t x, int32_t y) {
     }
 }
 
-void display_draw(const Sprite *sprite, int32_t x, int32_t y) {
+void display_draw(Sprite *sprite, int32_t x, int32_t y) {
     const int32_t width = sprite_getWidth(sprite);
     const int32_t height = sprite_getWidth(sprite);
 
     for (int32_t i = 0; i < height; i++) {
         for (int32_t j = 0; j < width; j++) {
+            sprite_setColor(display.buffer, j + x, i + y,
+                            sprite_getColor(sprite, j, i));
             sprite_setData(display.buffer, j + x, i + y,
                            sprite_getData(sprite, j, i));
         }
@@ -92,8 +108,11 @@ void display_draw(const Sprite *sprite, int32_t x, int32_t y) {
 void display_show() {
     for (int32_t i = 0; i < display.height; i++) {
         for (int32_t j = 0; j < display.width; j++) {
+            int16_t colorID = sprite_getColor(display.buffer, j, i);
+            attron(COLOR_PAIR(colorID));
             move(i, j);
             addch(sprite_getData(display.buffer, j, i));
+            attroff(COLOR_PAIR(colorID));
         }
     }
 
