@@ -43,6 +43,10 @@ project "Terminal" -- Set the project name
         systemversion "latest"
         system "macosx"
 
+        defines {
+            "__UNIX_"
+        }
+
         links {
             "ncurses"
         }
@@ -50,6 +54,10 @@ project "Terminal" -- Set the project name
     filter "system:linux"
         system "linux"
         systemversion "latest"
+
+        defines {
+            "__UNIX_"
+        }
 
         links {
             "ncurses"

@@ -12,6 +12,7 @@
 #define __DISPLAY_H_
 
 #include <stdint.h>
+#include <wchar.h>
 
 #include "Terminal/Sprite.h"
 

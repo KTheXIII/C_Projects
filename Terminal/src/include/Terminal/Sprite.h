@@ -12,6 +12,7 @@
 #define __SPRITE_H_
 
 #include <stdint.h>
+#include <wchar.h>
 
 typedef struct Sprite Sprite;
 

@@ -21,16 +21,32 @@ Display display;
 
 // Platform specific code
 
-#ifdef __unix_
+#ifdef __UNIX_
+
+#include <ncurses.h>
+#include <wchar.h>
 
 Display *TL_DisplayConstruct(int32_t width, int32_t height) {
     display.width = width;
     display.height = height;
+
+    display.buffer = initscr();
+    // getmaxyx(stdscr, display.height, display.width);
+
     display.buffer = TL_SpriteConstruct(display.width, display.height);
 
-    // TODO: Use ncurses to
-
     return &display;
+}
+
+void TL_DisplayShow() {
+    for (int32_t i = 0; i < display.height; i++) {
+        for (int32_t j = 0; j < display.width; j++) {
+            move(i, j);
+            addch(TL_SpriteGetData(display.buffer, j, i));
+        }
+    }
+
+    refresh();
 }
 
 #elif _WIN32

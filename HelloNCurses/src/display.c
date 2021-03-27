@@ -93,7 +93,7 @@ void display_print(const char *text, int32_t x, int32_t y) {
 
 void display_draw(Sprite *sprite, int32_t x, int32_t y) {
     const int32_t width = sprite_getWidth(sprite);
-    const int32_t height = sprite_getWidth(sprite);
+    const int32_t height = sprite_getHeight(sprite);
 
     for (int32_t i = 0; i < height; i++) {
         for (int32_t j = 0; j < width; j++) {

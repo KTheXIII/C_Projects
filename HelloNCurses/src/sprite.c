@@ -12,7 +12,7 @@ struct Sprite {
 };
 
 struct Sprite *sprite_construct(int32_t width, int32_t height) {
-    Sprite *sprite = malloc(sizeof(Sprite));
+    Sprite *sprite = (Sprite *)malloc(sizeof(Sprite));
     sprite->width = width;
     sprite->height = height;
     sprite->dataBuffer = malloc(sizeof(uint32_t) * width * height);
