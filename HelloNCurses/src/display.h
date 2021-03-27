@@ -11,31 +11,28 @@
 #ifndef __DISPLAY_H_
 #define __DISPLAY_H_
 
-#include <wchar.h>
+#include "sprite.h"
 #include <stdint.h>
-#include <ncurses.h>
 
-/**
- * Display data container
- */
-typedef struct {
-    int32_t width;
-    int32_t height;
-    int32_t *buffer;
-} DISPLAY;
+typedef struct Display Display;
 
-DISPLAY *display_init();
+Display *display_construct();
 
-DISPLAY *display_getbuffer();
+Display *display_get();
 
-WINDOW *display_getwindow();
+void display_destructor();
+
+void display_setInputTimeout(const int32_t timeout);
+void display_setNoInputTimeout();
+
+int32_t display_getInput();
 
 void display_clear();
 
-void display_set(int32_t row, int32_t col, int32_t value);
+void display_print(const char *text, int32_t x, int32_t y);
+
+void display_draw(const Sprite *sprite, int32_t x, int32_t y);
 
 void display_show();
-
-void display_cleanup();
 
 #endif

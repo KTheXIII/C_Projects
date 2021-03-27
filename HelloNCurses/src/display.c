@@ -1,56 +1,85 @@
+/**
+ * @file    display.c
+ * @author  KTheXIII (pratchaya.k.git@gmail.com)
+ * @brief   display.h implementations
+ * @version 0.1
+ * @date    2021-03-23
+ *
+ * @copyright Copyright (c) 2021
+ */
+
 #include "display.h"
 
-#include <stdlib.h>
+#include <ncurses.h>
+#include <stdint.h>
 
-WINDOW *window = NULL;
-DISPLAY data;
+struct Display {
+    WINDOW *window;
+    int32_t width;
+    int32_t height;
 
-DISPLAY *display_init() {
-    // Initialize ncurses
-    window = initscr();
-    getmaxyx(stdscr, data.height, data.width);
+    Sprite *buffer;
+};
 
-    data.buffer = malloc(sizeof(int32_t) * data.width * data.height);
+Display display;
+bool initialized = false;
 
-    display_clear();
+Display *display_construct() {
+    if (initialized) return &display;
 
-    curs_set(0);  // disable cursor
+    display.window = initscr();
+    getmaxyx(stdscr, display.height, display.width);
 
-    return &data;
+    display.buffer = sprite_construct(display.width, display.height);
+
+    initialized = true;
+    return &display;
 }
 
-DISPLAY *display_getbuffer() { return &data; }
+Display *display_get() {
+    if (!initialized) return NULL;
+    return &display;
+}
 
-WINDOW *display_getwindow() { return window; }
+void display_destructor() {
+    endwin();
+    sprite_destructor(display.buffer);
+}
+
+void display_setInputTimeout(const int32_t timeout) { timeout(timeout); }
+void display_setNoInputTimeout() { display_setInputTimeout(0); }
+
+int32_t display_getInput() { return getch(); }
 
 void display_clear() {
-    for (int32_t i = 0; i < data.height; i++) {
-        for (int32_t j = 0; j < data.width; j++) {
-            data.buffer[i * data.width + j] = ' ';
+    for (int32_t i = 0; i < display.height; i++) {
+        for (int32_t j = 0; j < display.width; j++) {
+            sprite_setData(display.buffer, j, i, ' ');
         }
     }
 }
 
-void display_set(int32_t row, int32_t col, int32_t value) {
-    if (row > -1 && row < data.height && col > -1 && col < data.width) {
-        data.buffer[row * data.width + col] = value;
+void display_print(const char *text, int32_t x, int32_t y) {}
+
+void display_draw(const Sprite *sprite, int32_t x, int32_t y) {
+    const int32_t width = sprite_getWidth(sprite);
+    const int32_t height = sprite_getWidth(sprite);
+
+    for (int32_t i = 0; i < height; i++) {
+        for (int32_t j = 0; j < width; j++) {
+            sprite_setData(display.buffer, j + x, i + y,
+                           sprite_getData(sprite, j, i));
+        }
     }
 }
 
 void display_show() {
-    for (int32_t i = 0; i < data.height; i++) {
-        for (int32_t j = 0; j < data.width; j++) {
-            int32_t value = data.buffer[i * data.width + j];
-            mvaddch(i, j, value);
+    for (int32_t i = 0; i < display.height; i++) {
+        for (int32_t j = 0; j < display.width; j++) {
+            move(i, j);
+            addch(sprite_getData(display.buffer, j, i));
         }
     }
 
     refresh();
-}
-
-void display_cleanup() {
-    free(data.buffer);
-
-    // Cleanup ncurses
-    endwin();
 }
