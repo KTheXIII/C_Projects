@@ -17,7 +17,7 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    TL_DisplayConstruct(120, 40);
+    TL_DisplayConstruct(TL_DONT_CARE, TL_DONT_CARE);
 
     int32_t displayWidth = TL_DisplayGetWidth();
     int32_t displayHeight = TL_DisplayGetHeight();

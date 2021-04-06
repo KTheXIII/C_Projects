@@ -26,12 +26,17 @@ Display display;
 #include <ncurses.h>
 #include <wchar.h>
 
+// Specific data for different platform
+WINDOW *window;
+
 Display *TL_DisplayConstruct(int32_t width, int32_t height) {
     display.width = width;
     display.height = height;
 
-    display.buffer = initscr();
-    // getmaxyx(stdscr, display.height, display.width);
+    window = initscr();
+
+    if (width == TL_DONT_CARE) display.width = getmaxx(stdscr);
+    if (height == TL_DONT_CARE) display.height = getmaxy(stdscr);
 
     display.buffer = TL_SpriteConstruct(display.width, display.height);
 

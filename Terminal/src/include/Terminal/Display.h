@@ -16,6 +16,8 @@
 
 #include "Terminal/Sprite.h"
 
+#define TL_DONT_CARE INT32_MIN
+
 typedef struct Display Display;
 
 Display *TL_DisplayConstruct(int32_t width, int32_t height);
