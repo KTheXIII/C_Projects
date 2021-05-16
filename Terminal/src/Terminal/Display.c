@@ -54,6 +54,12 @@ void TL_DisplayShow() {
     refresh();
 }
 
+void TL_DisplayCleanUp() { endwin(); }
+
+void TL_NoInputTimeout() { timeout(0); }
+void TL_ShowCursor(int8_t enable) { curs_set(enable); }
+int32_t TL_GetInput() { return getch(); }
+
 #elif _WIN32
 
 #include <Windows.h>
@@ -75,6 +81,10 @@ Display *TL_DisplayConstruct(int32_t width, int32_t height) {
     return &display;
 }
 
+void TL_DisplayCleanUp() {
+    // TODO: Windows Implementation
+}
+
 void TL_DisplayShow() {
     const int32_t width = TL_SpriteGetWidth(display.buffer);
     const int32_t height = TL_SpriteGetHeight(display.buffer);
@@ -83,12 +93,23 @@ void TL_DisplayShow() {
                                  &bytesWritten);
 }
 
+void TL_NoInputTimeout() {
+    // TODO: Windows Implementation
+}
+void TL_ShowCursor(int8_t enable) {
+    // TODO: Windows Implementation
+}
+int32_t TL_GetInput() {
+    // TODO: Windows Implementation
+    return -1;
+}
 #endif
 
 // Platform agnostic code
 
 void TL_DisplayDestruct() {
     // free up the buffer
+    TL_DisplayCleanUp();
     TL_SpriteDestruct(display.buffer);
 }
 

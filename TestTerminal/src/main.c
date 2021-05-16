@@ -10,22 +10,28 @@ int main(int argc, char const *argv[]) {
     float xDir = 1.f, yDir = 1.f;
     float speed = 0.01f;
 
+    // Attempt to create square
     Sprite *sprite = TL_SpriteConstruct(spriteWidth, spriteHeight);
     for (int32_t i = 0; i < TL_SpriteGetHeight(sprite); i++) {
         for (int32_t j = 0; j < TL_SpriteGetWidth(sprite); j++) {
-            TL_SpriteSetData(sprite, j, i, L'▇');
+            TL_SpriteSetData(sprite, j, i, L'*');
         }
     }
 
     TL_DisplayConstruct(TL_DONT_CARE, TL_DONT_CARE);
+    TL_NoInputTimeout();
 
     int32_t displayWidth = TL_DisplayGetWidth();
     int32_t displayHeight = TL_DisplayGetHeight();
 
-    wchar_t text[256] = L"Hello, World!";
+    wchar_t text[256] = L"Hello, World!\nPress 'q' to exit";
 
-    while (1) {
+    int8_t isRunning = 0x01;
+
+    while (isRunning) {
         // Update
+        int32_t input = TL_GetInput();
+        if (input == 'q') isRunning = 0x00;
 
         x += speed * xDir;
         y += speed * yDir;

@@ -31,4 +31,8 @@ void TL_DisplayPrint(const wchar_t *text, int32_t x, int32_t y);
 void TL_DisplayDraw(Sprite *sprite, int32_t x, int32_t y);
 void TL_DisplayShow();
 
+void TL_NoInputTimeout();
+void TL_ShowCursor(int8_t enable);
+int32_t TL_GetInput();
+
 #endif

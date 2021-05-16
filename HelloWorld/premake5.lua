@@ -21,7 +21,7 @@ project "HelloWorld" -- Set the project name
     }
 
     libdirs {
-        -- lib directory 
+        -- lib directory
     }
 
     links {
@@ -39,11 +39,11 @@ project "HelloWorld" -- Set the project name
     filter "system:macosx"
         systemversion "latest"
         system "macosx"
-    
+
     filter "system:linux"
         system "linux"
         systemversion "latest"
-    
+
     filter "system:Windows"
         system "Windows"
         systemversion "latest"
